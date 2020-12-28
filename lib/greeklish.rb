@@ -7,6 +7,7 @@ require 'i18n'
 module Greeklish
   I18n.load_path += Dir[File.expand_path('config/locales' + '/*.yml')]
   I18n.available_locales = [:el, :en]
+  I18n.default_locale = :el
 
   @bk_tree ||= BkTreeBuilder.build
 

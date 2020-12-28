@@ -15,6 +15,8 @@ describe Greeklish::Levenshtein do
       { from: 'ελληνικά', to: 'ελληνικός', distance: 2 }
     ].each do |values|
       it 'returns the correct edit distance' do
+        I18n.locale = :el
+
         expect(described_class.distance(values[:from], values[:to]))
           .to eq(values[:distance])
       end

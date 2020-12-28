@@ -3,7 +3,7 @@ require 'i18n'
 RSpec.configure do |config|
   I18n.load_path += Dir[File.expand_path('config/locales' + '/*.yml')]
   I18n.available_locales = [:el, :en]
-  I18n.default_locale = :el
+  I18n.locale = :el
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
