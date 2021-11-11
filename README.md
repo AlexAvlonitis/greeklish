@@ -12,8 +12,6 @@ purposes only, not meant for production environments. Practised the Levenshtein 
 
 On first run it builds the BK-tree out of a 500_000 word greek dictionary and stores it in memory, it will build a bk_tree.yml file so the next time it will boot up significally faster.
 
-**Useful links:**
-
 [What is a bk-tree](https://www.youtube.com/watch?v=oIsPB2pqq_8)
 
 
@@ -23,11 +21,11 @@ This is nothing but a one to one mapping of each latin letter into its greek equ
 
 `>> Greek aproximate spell checking`
 
+For each word it parses the bk-tree and transforms it to the closest word it finds, specified by the DIST_THRESHOLD with default value 1. Meaning it will either return exact matches of 0 distance or the first 3 matches with distance 1 i.e: "αυτό/αυγό/αργό".
+
 [Understanding Levenshtein edit distance (article)](https://medium.com/@ethannam/understanding-the-levenshtein-distance-equation-for-beginners-c4285a5604f0)
 
 [Understanding Levenshtein edit distance (video)](https://www.youtube.com/watch?v=b6AGUjqIPsA)
-
-For each word it parses the bk-tree and transforms it to the closest word it finds, specified by the DIST_THRESHOLD with default value 1. Meaning it will either return exact matches of 0 distance or the first 3 matches with distance 1 i.e: "αυτό/αυγό/αργό".
 
 
 ## Installation
