@@ -10,7 +10,7 @@ purposes only, not meant for production environments. Practised the Levenshtein 
 
 `>> Build BK tree out of the greek dictionary`
 
-On first run it builds the BK-tree out of a 500_000 word greek dictionary and stores it in memory, it will build a bk_tree.yml file so the next time it will boot up significally faster.
+On the first run it builds a BK-tree out of a 500_000 word greek dictionary and stores it in memory, it will also build a bk_tree.yml file so the next runs will boot up significally faster.
 
 [What is a bk-tree](https://www.youtube.com/watch?v=oIsPB2pqq_8)
 
