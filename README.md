@@ -28,22 +28,6 @@ For each word it parses the bk-tree and transforms it to the closest word it fin
 [Understanding Levenshtein edit distance (video)](https://www.youtube.com/watch?v=b6AGUjqIPsA)
 
 
-## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'greeklish'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install greeklish
-
 ## Usage
 
 ```ruby
