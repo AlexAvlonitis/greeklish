@@ -28,14 +28,6 @@ For each word it parses the bk-tree and transforms it to the closest word it fin
 [Understanding Levenshtein edit distance (video)](https://www.youtube.com/watch?v=b6AGUjqIPsA)
 
 
-## Usage
-
-```ruby
-require 'greeklish'
-
-Greeklish.convert('ti kaneis')
-```
-
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
