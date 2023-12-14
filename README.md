@@ -3,7 +3,7 @@
 Converts greeklish i.e 'ti kanete' to greek 'τι κάνετε' and applies appropriate spell-checking. 
 
 This project is for educational
-purposes only, not meant for production environments. Practised the Levenshtein algorithm for the edit distance between words and BK-Tree to construct a tree based on the words' distance in ruby.
+purposes only, not meant for production environments. Used the Levenshtein algorithm for the edit distance between words. 
 
 
 ### **High level Algorithm explanation**
