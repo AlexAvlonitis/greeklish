@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 # encoding: UTF-8
 
-require 'greeklish/node'
-require 'pry'
+require_relative './node'
 
 # BK-tree implementation
 module Greeklish
   class BkTree
     attr_reader :root_node
 
-    def initialize(node_klass = Node)
-      @node_klass = node_klass
+    NUM_OF_MATCHES = 3
+
+    def initialize
       @root_node = nil
     end
 
@@ -18,7 +18,7 @@ module Greeklish
       if root_node
         root_node.insert(word)
       else
-        @root_node = node_klass.new(word)
+        @root_node = Node.new(word)
       end
     end
 
@@ -27,23 +27,21 @@ module Greeklish
       if matches.values.min == 0
         exact_match(matches)
       else
-        first_n_matches(matches, 3)
+        first_n_matches(matches)
       end
     end
 
     private
 
-    attr_reader :node_klass
-
     def exact_match(matches)
       matches.find { |word, dist| word if dist == 0 }.first
     end
 
-    def first_n_matches(matches, num)
+    def first_n_matches(matches)
       matches
-        .sort_by { |word, dist| dist }
-        .first(num)
-        .map { |w, dist| w }
+        .sort_by { |_, dist| dist }
+        .first(NUM_OF_MATCHES)
+        .map { |w, _| w }
         .join('/')
     end
   end

@@ -1,7 +1,5 @@
-require "greeklish/version"
-require "greeklish/converter"
-require "greeklish/bk_tree_builder"
-require 'pry'
+require_relative "./greeklish/converter"
+require_relative "./greeklish/bk_tree_builder"
 require 'i18n'
 
 module Greeklish

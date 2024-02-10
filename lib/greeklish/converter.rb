@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "greeklish/latin_to_greek"
+require_relative "./latin_to_greek"
 
 # Greek spell checking using BK-tree and Levenshtein distance algorithms
 module Greeklish
@@ -10,7 +10,23 @@ module Greeklish
         greek_text = LatinToGreek.convert(text)
 
         I18n.locale = :el
-        greek_text.split(' ').map { |word| bk_tree.search(word) }.join(' ')
+        split_text(greek_text)
+          .map { |word| fuzzy_search(word, bk_tree) }
+          .join(' ')
+      end
+
+      private
+
+      def split_text(text)
+        text.split(' ')
+      end
+
+      def fuzzy_search(word, bk_tree)
+        bk_tree.search(remove_punctuation(word))
+      end
+
+      def remove_punctuation(word)
+        word.gsub(/[^α-ωΑ-Ω]/, '')
       end
     end
   end

@@ -1,41 +1,40 @@
 # Greeklish
 
-Converts greeklish i.e 'ti kanete' to greek 'τι κάνετε' and applies appropriate spell-checking. 
-
-This project is for educational
-purposes only, not meant for production environments. Used the Levenshtein algorithm for the edit distance between words. 
+Converts greeklish i.e 'ti kanete' to greek 'τι κάνετε' and applies appropriate spell-checking.
+Experimented with the Levenshtein algorithm.
 
 
 ### **High level Algorithm explanation**
 
 `> Convert greeklish to greek`
 
-`>> Build BK tree out of the greek dictionary`
+`>> Build a BK-tree out of the greek dictionary`
 
-On the first run it builds a BK-tree out of a 500_000 word greek dictionary and stores it in memory, it will also build a bk_tree.yml file so the next runs will boot up significally faster.
+On the first run, it builds a BK-tree out of a 500,000-word Greek dictionary `greek.dic` and stores it in memory. It will also create a local "bk_tree.yml" file, so on subsequent runs, it can be used directly, resulting in faster loading.
 
 [What is a bk-tree](https://www.youtube.com/watch?v=oIsPB2pqq_8)
 
-
 `>> One to one mapping latin to greek conversion`
 
-This is nothing but a one to one mapping of each latin letter into its greek equivalent, specified by the en.yml file with only few special cases of diphthongs.
+This is nothing but a one to one mapping of each latin letter into its greek equivalent, specified by the en.yml file, with only few special cases of diphthongs.
 
-`>> Greek aproximate spell checking`
+`>> Greek approximate spell checking / fuzzy search`
 
-For each word it parses the bk-tree and transforms it to the closest word it finds, specified by the DIST_THRESHOLD with default value 1. Meaning it will either return exact matches of 0 distance or the first 3 matches with distance 1 i.e: "αυτό/αυγό/αργό".
+For each mapped word to its greek equivalent, it parses the bk-tree and transforms it to the closest word it finds, specified by the `DIST_THRESHOLD` constant with a default value of 1. Meaning, it will either return exact matches of 0 distance or the first 3 matches with distance 1. example: αυπο -> "αυτό/αυγό". The larger the `DIST_THRESHOLD` the slower the performance.
 
 [Understanding Levenshtein edit distance (article)](https://medium.com/@ethannam/understanding-the-levenshtein-distance-equation-for-beginners-c4285a5604f0)
 
 [Understanding Levenshtein edit distance (video)](https://www.youtube.com/watch?v=b6AGUjqIPsA)
 
 
-## Development
+### How to run
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+```ruby
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+irb
 
-## Contributing
+require './lib/greeklish'
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/alexavlonitis/greeklish.
+Greeklish.convert('ti kanete')
+
+```

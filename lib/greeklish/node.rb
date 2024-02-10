@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 # encoding: UTF-8
 
-require 'greeklish/levenshtein'
-require 'pry'
+require_relative './levenshtein'
 
 # BK-tree implementation
 module Greeklish
@@ -11,10 +10,9 @@ module Greeklish
 
     DIST_THRESHOLD = 1
 
-    def initialize(value, levenshtein_klass = Levenshtein)
+    def initialize(value)
       @value = value
       @children = {}
-      @levenshtein_klass = levenshtein_klass
     end
 
     def to_s
@@ -22,33 +20,37 @@ module Greeklish
     end
 
     def insert(word)
-      distance = distance(word)
+      edit_distance = edit_distance(word)
 
-      if child_node = children[distance]
+      if child_node = children[edit_distance]
         child_node.insert(word)
       else
-        children[distance] = self.class.new(word)
+        children[edit_distance] = self.class.new(word)
       end
     end
 
     def search(word, matches = {})
-      distance = distance(word)
-      matches[self.to_s] = distance if distance <= DIST_THRESHOLD
+      edit_distance = edit_distance(word)
+      matches[self.to_s] = edit_distance if edit_distance <= DIST_THRESHOLD
 
-      ((distance - DIST_THRESHOLD)..(distance + DIST_THRESHOLD)).each do |score|
-        child_node = children[score]
-        child_node.search(word, matches) if child_node
-      end
+      search_children(edit_distance, word, matches)
 
       matches
     end
 
     private
 
-    attr_reader :value, :levenshtein_klass
+    attr_reader :value
 
-    def distance(word)
-      levenshtein_klass.distance(word, self.to_s)
+    def edit_distance(word)
+      Levenshtein.distance(word, self.to_s)
+    end
+
+    def search_children(edit_distance, word, matches)
+      ((edit_distance - DIST_THRESHOLD)..(edit_distance + DIST_THRESHOLD)).each do |score|
+        child_node = children[score]
+        child_node.search(word, matches) if child_node
+      end
     end
   end
 end

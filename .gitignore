@@ -7,4 +7,6 @@
 /spec/reports/
 /tmp/
 *.yml
+!el.yml
+!en.yml
 *.gem

@@ -2,11 +2,10 @@
 
 require 'spec_helper'
 require 'greeklish/bk_tree'
-require 'greeklish/node'
 
 describe Greeklish::BkTree do
   let(:file) { File.read('spec/fixtures/sample.dic') }
-  let(:subject) { described_class.new(Greeklish::Node) }
+  let(:subject) { described_class.new }
 
   before { file.each_line.each { |w| subject.insert(w.chomp) } }
 
@@ -25,9 +24,9 @@ describe Greeklish::BkTree do
 
   context '.search' do
     [
-      { input: 'αερασ', expected: 'αέρας' },
+      { input: 'αέρασ', expected: 'αέρας' },
       { input: 'αέριο', expected: 'αέριο' },
-      { input: 'αλεξισ', expected: 'αλέξης' },
+      { input: 'αλέξις', expected: 'αλέξης' },
       { input: 'βιβλια', expected: 'βιβλία' }
     ].each do |values|
       it 'finds the closest word' do
